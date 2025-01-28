@@ -1,0 +1,8 @@
+#Lista de streams para la visualización en grafana
+streams:
+    dahue:
+        - 'rtsp://admin:test1122@129.222.172.5:554/Streaming/Channels/101'
+    dahui:
+        - 'rtsp://admin:test1122@129.222.172.5:554/Streaming/Channels/102'
+    dahua:
+        - rtsp://rtsp-server:8554/mystream
