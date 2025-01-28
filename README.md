@@ -10,7 +10,7 @@ La visualización de estos resultados es accesible mediante Grafana. El sistema 
 ### Arquitectura del sistema de detección
 
 
-![](images/esquema_general.jpg)
+![](images/esquema-general.jpg)
 
 Cada bloque de la imagen representa un contenedor Docker ejecutandose. Estas etapas o secciones son:
 
@@ -25,14 +25,14 @@ Posterior a la obtención de resultados mediante el modelo de detección, se rea
 
 Como se mencionó, la transmisión de los datos entre contenedores se realiza gracias a Apache Kafka. Este sistema se hospeda en dos contenedores, uno que aloja el broker de Kafka encargado del almacenamiento de los mensajes y la configuración de tópicos, y otro contenedor dispuesto para Apache Zookeeper, servicio encargado de coordinar los procesos distribuidos para Kafka. Un esquema de la comunicación del productor con el consumidor mediante los tópicos se puede ver en la siguiente figura:
 
-![](images/esquema_transmision.jpg)
+![](images/esquema-transmision.jpg)
 
 #### Etapa de transmisión de video en vivo
 
 
 Una de las formas de visualización de los resultados obtenidos mediante la detección de objetos es la de un video en vivo que muestra las imágenes originales de las cámaras con las cajas de detección aplicadas encima, esto se obtiene gracias al sistema compuesto por un total de dos contenedores. El primer contenedor se encarga de ejecutar el algoritmo de python ***transmision.py***, este código se encarga de consumir los objetos JSON desde los tres tópicos de Kafka que contienen las imágenes resultado de la aplicación del modelo YOLO para cada cámara, posteriormente se encarga de desempaquetar y reconstruir dichas imagenes para posteriormente enviarlas hacia un servidor RTSP que está hospedado en el segundo contenedor de este sistema. Esta transmisión RTSP es en vivo y es accesible mediante su dirección o por otra parte, mediante un dashboard ya configurado en Grafana. Un esquema de esta etapa se ve a continuación:
 
-![](images/esquema_vivo.jpg)
+![](images/esquema-vivo.jpg)
 
 #### Etapa de alertas de detección
 
